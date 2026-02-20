@@ -12,8 +12,6 @@ html, body{
     max-width: 1024px;
     margin: 0 auto;
     padding: 0 24px;
-    display: flex;
-    align-items: center;
 }
 
 .header{
@@ -21,7 +19,6 @@ html, body{
     top: 0;
     z-index: 10;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
-    background: rgba(225, 255, 255, .65);
 }
 
 .page-title{
@@ -55,7 +52,6 @@ html, body{
 }
 
 .tabs__item--active{
-    background: #efaaff;
     border-color: #cfc6f5;
     color: #735cc6;
 }
@@ -170,4 +166,98 @@ html, body{
 .toolbar__search:focus{
     border: 1px solid #7e66cd;
     box-shadow: 3px solid rgba(126, 102, 205, 0.28);
+}
+
+.todo{
+    background:
+    radial-gradient(1200px 900px at 20% 25%, #ebe6f5 0%, transparent 60%),
+    radial-gradient(1200px 900px at 80% 35%, #f6eee4 0%, transparent 60%),
+    radial-gradient(1200px 900px at 50% 85%, #e6eef6 0%, transparent 60%),
+    linear-gradient(#f6f3f9, #fbfaf8);
+    background-attachment: fixed;
+}
+
+.tasks{
+    padding: 10px 12px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.task__title{
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #221c2a;
+}
+
+.task__meta{
+    font-size: 12px;
+    color: #8a8398;
+}
+
+.task__actions{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task__action{
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 6px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.task__action:hover{
+    background: #f6f4ff;
+    border-color: rgba(30, 10, 60, 0.12);
+    box-shadow: rgba(30, 10, 60, 0.12);
+}
+
+.task__action:focus{
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 10, 60, 0.22);
+}
+
+.task__action:active{
+    transform: translateY(1px);
+}
+
+.task__icon{
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+.footer__control{
+    align-items: center;
+    flex-direction: row;
+    margin-top: 4px;
+}
+
+.footer-controls__counters{
+    font-size: 13px;
+    color: #6f6781;
+    margin-left: 5px;
+}
+
+.footer-controls__clear{
+    padding: 6px 12px;
+    font-size: 13;
+    border-radius: 8px;
+    cursor:pointer;
+    transform: all 0.3s ease-in-out;
+    color: #735cc6;
+    
 }
