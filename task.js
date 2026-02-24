@@ -200,3 +200,18 @@ const footer = document.querySelector('.footer-controls')
 const sortSelect = document.querySelector('.toolbar__sort')
 
 
+let amount = 3200;
+
+if (amount === 0) {
+    console.log("Корзина пуста");
+} else if (amount < 1000) {
+    console.log("Скидка не применяется")
+} else if (amount < 5000) {
+    console.log("Скидка 5%")
+} else {
+    console.log("Скидка 10%")
+}
+
+function findTaskByTitle(tasks,title){
+    
+}
