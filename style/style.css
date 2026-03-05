@@ -252,7 +252,7 @@ html, body{
     margin-left: 5px;
 }
 
-.footer-controls__clear{
+.button--clear{
     padding: 6px 12px;
     font-size: 13;
     border-radius: 8px;
@@ -262,21 +262,26 @@ html, body{
     border: 1px dashed #a28bdc;
 }
 
-.footer-controls__clear:hover{
+.button--clear:hover{
     background-color: #f6f4ff;
     color: #735cc6;
     border: 1px solid #735cc6;
 }
 
-.footer-controls__clear:active{
+.button--clear:active{
     background-color: #e9e5f9;
     border: 1px solid #5d47aa;
     color: #5d47aa;
 }
 
-.footer-controls__clear:disabled{
+.button--clear:disabled{
     color: #8e8b99;
     border: 1px solid #c8c5cf;
     background-color: #f1f1f3;
     cursor: not-allowed;
+}
+
+.input--error{
+    border-color: #cb6e6e;
+    box-shadow: 0 0 4px rgba(203, 110, 110, 0.3)
 }
