@@ -7,7 +7,7 @@ if(title === ""){
     console.log("Задача", title)
 }
 
-let tasks = 5
+
 
 if(tasks === 0){
     console.log("Список пуст")
@@ -181,7 +181,6 @@ task.append(content, actions)
 return task
 }
 
-const container = document.querySelector('main')
 
 const task1 = renderTask({
     text: "Сходить на прогулку",
@@ -194,10 +193,6 @@ const task2 = renderTask({
 })
 
 container.append(task1, task2)
-
-const searchInput = document.querySelector('.toolbar__search')
-const footer = document.querySelector('.footer-controls')
-const sortSelect = document.querySelector('.toolbar__sort')
 
 
 let amount = 3200;
@@ -316,31 +311,35 @@ const footer = document.querySelector('.footer-controls')
 
 tasks.forEach(task => {
     const card = renderTasks(task)
-    footer.before(card)
+    container.append(card)
 })
 }
 
-renderAll()
 
-const form = document.querySelector('form-add')
+const input = document.querySelector('.form-add__input')
+const addButton = document.querySelector('.form-add__button')
+const container = document.querySelector('.tasks')
+const form = document.querySelector('.form-add')
 
+const searchInput = document.querySelector('.toolbar__search')
+const footer = document.querySelector('.footer-controls')
+const sortSelect = document.querySelector('.toolbar__sort')
 let tasks = []
 
 form.addEventListener('sumbit', (event) => {
     event.preventDefault()
-    const text = input.ariaValueMax.trim()
+    const text = input.value.trim()
     if(text === '') return
     addTask()
+    
+    const newTask = {
+        id: tasks.length + 1,
+        text: text,
+        done: false,
+        date: formateDate(new Date)
+    }
+    tasks.push(newTask)
 })
-
-const newTask = {
-    id: tasks.length + 1,
-    text: text,
-    done: false,
-    date: "11.11.2026"
-}
-
-tasks.push(newTask)
 
 function addTask(){
     const text = input.value.trim()
@@ -358,8 +357,19 @@ function addTask(){
         done: false,
         date: 'создана сейчас'
     }
-    taska.push(newTask)
+    tasks.push(newTask)
     input.value = ''
     renderAll()
     
+}
+
+renderAll()
+
+function formatDate(date){
+    const day = date.getDate().toString().padStart(2, "0")
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const year = date.getFullYear()
+    const hour = date.getHours().toString().padStart(2, "0")
+    const min = date.getMinutes().toString.padStart(2, "0")
+    return `${day}.${month}.${year} - ${hours}:${min}`
 }
