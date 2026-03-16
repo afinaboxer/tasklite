@@ -184,7 +184,8 @@ html, body{
     background: #fff;
     margin-bottom: 15px;
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    flex-direction: column;
     justify-content: space-between;
     gap: 8px;
 }

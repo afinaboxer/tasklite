@@ -10,3 +10,4 @@ const minutes = now.getMinutes()
 const seconds = now.getSeconds()
 
 console.log(`${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`)
+
