@@ -3,14 +3,17 @@
 const input = document.querySelector(".form-add__input");
 const addButton = document.querySelector(".form-add__button");
 const container = document.querySelector(".tasks");
-const form = document.querySelector('.form-add')
+const form = document.querySelector('.form-add');
+const tabButtons = document.querySelectorAll(".tabs__item")
 
 const searchInput = document.querySelector(".toolbar__search");
 const footer = document.querySelector(".footer-controls");
 const sortSelect = document.querySelector(".toolbar__sort");
-let tasks = []
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-
+function saveTasks(){
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 
 form.addEventListener('submit', (event) => {
@@ -33,6 +36,7 @@ form.addEventListener('submit', (event) => {
   tasks.push(newTask)
   input.value = ''
   renderAll()
+  saveTasks()
 })
 
 function renderTask(task) {
@@ -80,6 +84,7 @@ function renderTask(task) {
     if (newText && newText.trim() !== '') {
       task.text = newText.trim();
       renderAll();
+      saveTasks()
     }
   });
 
@@ -107,7 +112,7 @@ function renderTask(task) {
   deleteBtn.addEventListener("click", () => {
     const index = tasks.indexOf(task);
     tasks.splice(index, 1);
-
+    saveTasks()
     renderAll()
   });
 
@@ -128,13 +133,26 @@ function renderTask(task) {
   return item;
 }
 
-
+let currentFilter = 'all'
 
 
 function renderAll() {
   container.innerHTML = ''
+
+  let filtered = tasks.filter(task => {
+    if (currentFilter === 'active') return !task.done;
+    if (currentFilter === 'done') return task.done;
+    return true;
+  })
   
-  const sortedTasks = [...tasks].sort((a, b) => {
+  const query = searchInput.value.trim().toLowerCase();
+  if (query){
+    filtered = filtered.filter(task => 
+        task.text.toLowerCase().includes(query)
+    );
+  }
+  let sortOrder = 'new'
+  const sortedTasks = [...filtered].sort((a, b) => {
     if(sortOrder === 'new') return b.id - a.id
     if(sortOrder === 'old') return a.id - b.id
     if(sortOrder === 'az') return a.text > b.text ? 1 : -1
@@ -147,6 +165,18 @@ function renderAll() {
     container.append(card)
   })
 }
+
+searchInput.addEventListener('input', renderAll);
+
+tabButtons.forEach(btn => {
+btn.addEventListener('click', () => {
+tabButtons.forEach(b => b.classList.remove('tabs__item--active'));
+btn.classList.add('tabs__item--active');
+if (btn.textContent.includes('Активные')) currentFilter = 'active';
+else if (btn.textContent.includes('Заверш')) currentFilter = 'done';
+else currentFilter = 'all';
+});
+});
 
 
 renderAll()
@@ -169,3 +199,25 @@ sortSelect.addEventListener('change', () => {
   else if(val.includes('Z-A')) sortOrder = 'za'
   renderAll()
 })
+
+
+
+
+function updateCounters() {
+    const total = tasks.length;
+    const active = tasks.filtere(t => !t.done).length;
+    const done = tasks.filter(t => t.done).length;
+    clearButton.disabled = tasks.every(task => !task.done);
+    const counters = document.querySelector('.footer-control__counters');
+    if (counters) {
+        counters.innerHTML = `
+        <span>Всего: ${total}</span>
+        <span>Активных: ${active}</span>
+        <span>Выполненных: ${done}</span>
+        `;
+    }
+
+    filtered.forEach(task => footer.before(renderTask(task)));
+updateCounters();
+
+}
