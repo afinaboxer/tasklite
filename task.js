@@ -150,6 +150,7 @@ function renderAll() {
     filtered = filtered.filter(task => 
         task.text.toLowerCase().includes(query)
     );
+    console.log('проверка')
   }
   let sortOrder = 'new'
   const sortedTasks = [...filtered].sort((a, b) => {
@@ -169,13 +170,13 @@ function renderAll() {
 searchInput.addEventListener('input', renderAll);
 
 tabButtons.forEach(btn => {
-btn.addEventListener('click', () => {
-tabButtons.forEach(b => b.classList.remove('tabs__item--active'));
-btn.classList.add('tabs__item--active');
-if (btn.textContent.includes('Активные')) currentFilter = 'active';
-else if (btn.textContent.includes('Заверш')) currentFilter = 'done';
-else currentFilter = 'all';
-});
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('tabs__item--active'));
+   btn.classList.add('tabs__item--active');
+      if (btn.textContent.includes('Активные')) currentFilter = 'active';
+      else if (btn.textContent.includes('Заверш')) currentFilter = 'done';
+      else currentFilter = 'all';
+  });
 });
 
 
@@ -205,7 +206,7 @@ sortSelect.addEventListener('change', () => {
 
 function updateCounters() {
     const total = tasks.length;
-    const active = tasks.filtere(t => !t.done).length;
+    const active = tasks.filter(t => !t.done).length;
     const done = tasks.filter(t => t.done).length;
     clearButton.disabled = tasks.every(task => !task.done);
     const counters = document.querySelector('.footer-control__counters');
