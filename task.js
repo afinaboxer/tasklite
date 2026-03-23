@@ -208,7 +208,13 @@ function updateCounters() {
     const total = tasks.length;
     const active = tasks.filter(t => !t.done).length;
     const done = tasks.filter(t => t.done).length;
+
     clearButton.disabled = tasks.every(task => !task.done);
+    if (clearButton) {
+      clearButton.disables = tasks.every(task => !task.done);
+    }
+  
+    
     const counters = document.querySelector('.footer-control__counters');
     if (counters) {
         counters.innerHTML = `
