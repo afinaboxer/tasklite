@@ -37,6 +37,7 @@ form.addEventListener('submit', (event) => {
   input.value = ''
   renderAll()
   saveTasks()
+  updateCounters()
 })
 
 function renderTask(task) {
@@ -85,6 +86,7 @@ function renderTask(task) {
       task.text = newText.trim();
       renderAll();
       saveTasks()
+      updateCounters()
     }
   });
 
@@ -114,6 +116,7 @@ function renderTask(task) {
     tasks.splice(index, 1);
     saveTasks()
     renderAll()
+    updateCounters()
   });
 
   actions.append(editBtn, deleteBtn);
@@ -127,7 +130,9 @@ function renderTask(task) {
     console.log(event.target);
     if (event.target.closest(".task__action")) return;
     task.done = !task.done;
+    saveTasks()
     renderAll()
+    updateCounters()
   });
 
   return item;
@@ -215,7 +220,7 @@ function updateCounters() {
     }
   
     
-    const counters = document.querySelector('.footer-control__counters');
+    const counters = document.querySelector('.footer-controls__counters');
     if (counters) {
         counters.innerHTML = `
         <span>Всего: ${total}</span>
@@ -228,3 +233,11 @@ function updateCounters() {
 updateCounters();
 
 }
+
+const clearButton = document.querySelector('.footer-controls__clear');
+clearButton.addEventListener('click', () => {
+  tasks = tasks.filter(task => !task.done);
+  saveTasks()
+  renderAll()
+  updateCounters()
+});
