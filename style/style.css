@@ -254,11 +254,13 @@ html, body{
 }
 
 .button--clear{
+    background: transparent;
+    text-align: left;
     padding: 6px 12px;
-    font-size: 13;
+    font-size: 13px;
     border-radius: 8px;
     cursor:pointer;
-    transform: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     color: #735cc6;
     border: 1px dashed #a28bdc;
 }
