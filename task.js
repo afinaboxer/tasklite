@@ -138,8 +138,8 @@ function renderTask(task) {
   return item;
 }
 
-let currentFilter = 'all'
-
+let currentFilter = 'all';
+let sortOrder = 'old';
 
 function renderAll() {
   container.innerHTML = ''
@@ -178,9 +178,13 @@ tabButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     tabButtons.forEach(b => b.classList.remove('tabs__item--active'));
    btn.classList.add('tabs__item--active');
-      if (btn.textContent.includes('Активные')) currentFilter = 'active';
-      else if (btn.textContent.includes('Заверш')) currentFilter = 'done';
+
+   const filterType = btn.dataset.filter;
+      if (filterType === 'active') currentFilter = 'active';
+      else if (filterType === 'done') currentFilter = 'done';
       else currentFilter = 'all';
+
+      renderAll();
   });
 });
 
@@ -196,7 +200,7 @@ function formatDate(date){
   return `${day}.${month}.${year}, ${hour}:${min}`
 }
 
-let sortOrder = 'new';
+
 sortSelect.addEventListener('change', () => {
   const val = sortSelect.value
   if(val.includes('новые')) sortOrder = 'new'
@@ -241,3 +245,37 @@ clearButton.addEventListener('click', () => {
   renderAll()
   updateCounters()
 });
+
+function renderBoard() {
+  columns.forEach(column => {
+    const status = column.dataset.status;
+    const taskList = column.querySelector('.task-list');
+    taskList.innerHTML = '';
+
+    boardData[status].forEach((task, index) => {
+      const el = document.createElement('article');
+      el.className = 'task kanban';
+      el.draggable = true;
+      el.dataset.index = index;
+      el.innerHTML = `
+      <h3 class="task__title">${task.title}</h3>
+      ${task.desc ? `<p class="task__desc">${task.desc}</p>` : ''}
+      <footer class="task__footer">
+        <span class="task__label ${task.priority}">${task.priorityText}</span>
+        <time class="task__date">${task.deadline}</time>
+      </footer>
+      `;
+      taskList.appendChild(el);
+    })
+
+    uptadeCount(column);
+  })
+
+  localStorage.setItem('kanbanData', JSON.stringify(boardData));
+}
+
+function uptadeCount(column) {
+  const countEl = column.querySelector('.column__count');
+  const status = column.dataset.status;
+  countEl.textContent = boardData[status].length;
+}
