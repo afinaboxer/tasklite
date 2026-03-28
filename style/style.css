@@ -190,6 +190,15 @@ html, body{
     gap: 8px;
 }
 
+.task--done .task__title{
+    text-decoration: line-through;
+    color: #9b96a6;
+}
+
+.task--done .task__meta{
+    color: #c2bcc9;
+}
+
 .task__title{
     font-size: 14px;
     font-weight: 700;

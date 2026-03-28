@@ -200,6 +200,19 @@ function formatDate(date){
   return `${day}.${month}.${year}, ${hour}:${min}`
 }
 
+function formatDate(){
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 12){
+    return "Утро";
+  } else if (hour >= 12 && hour < 18){
+    return "День";
+  } else if (hour >= 18 && hour < 24){
+    return "Вечер";
+  } else {
+    return "Ночь"
+  }
+}
+console.log(formateDate())
 
 sortSelect.addEventListener('change', () => {
   const val = sortSelect.value
