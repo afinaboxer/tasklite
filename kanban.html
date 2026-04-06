@@ -21,95 +21,83 @@
         <h1 class="page-title">Доска задач</h1>
         <div class="board">
 
-            <div class="column" data-status="in-progress">
+            <!-- To Do Column -->
+            <div class="column" data-status="todo">
                 <div class="column__header">
                     <h2>To Do</h2>
-                    <span class="column__count">2</span>
+                    <span class="column__count">3</span>
                 </div>
+                <div class="task-list">
+                    <article class="task kanban">
+                        <h3 class="task__title">Прочитать документацию</h3>
+                        <p class="task__desc">Разобраться с методами drag&amp;drop API и локальным сохранинием.</p>
+                        <footer class="task__footer">
+                            <span class="task__label high">Высокий приоритет</span>
+                            <time class="task__date">до 12.11</time>
+                        </footer>
+                    </article>
+
+                    <article class="task kanban">
+                        <h3 class="task__title">Сверстать главную страницу</h3>
+                        <p class="task__desc">Создать адаптивную сетку и добавить стили для хедера и кнопок.</p>
+                        <footer class="task__footer">
+                            <span class="task__label medium">Средний приоритет</span>
+                            <time class="task__date">до 15.11</time>
+                        </footer>
+                    </article>
+
+                    
             </div>
 
-            <div class="task-list">
-                <article class="task kanban">
-                    <h3 class="task__title">Прочитать документацию</h3>
-                    <p class="task__desc">Разобраться с методами drag&amp;drop API и локальным сохранинием.</p>
-                    <footer class="task__footer">
-                        <span class="task__label high">Высокий приоритет</span>
-                        <time class="task__date">до 12.11</time>
-                    </footer>
-                </article>
-
-                
-                <article class="task kanban">
-                    <h3 class="task__title">Сверстать главную страницу</h3>
-                    <p class="task__desc">Создать адаптивную сетку и добавить стили для хедера и кнопок.</p>
-                    <footer class="task__footer">
-                        <span class="task__label medium">Средний приоритет</span>
-                        <time class="task__date">до 15.11</time>
-                    </footer>
-                </article>
-
+            <!-- In Progress Column -->
+            <div class="column" data-status="in-progress">
+                <div class="column__header">
+                    <h2>In Progress</h2>
+                    <span class="column__count">1</span>
+                </div>
+                <div class="task-list">
+                    <article class="task kanban">
+                        <h3 class="task__title">Настроить стили</h3>
+                        <p class="task__desc">Согласовать цветовую схему и тени, привести отступы к системе 8 px.</p>
+                        <footer class="task__footer">
+                            <span class="task__label low">Низкий приоритет</span>
+                            <time class="task__date">до 10.11</time>
+                        </footer>
+                    </article>
+                </div>
                 <button class="add-task">+ Добавить задачу</button>
             </div>
 
-            <div class="task-list">
-                <article class="task kanban">
-                    <h3 class="task__title">Сделать основные задачи</h3>
-                    <p class="task__desc">Создать начальные точки для опоры.</p>
-                    <footer class="task__footer">
-                        <span class="task__label high">Высокий приоритет</span>
-                        <time class="task__date">до 13.11</time>
-                    </footer>
-                </article>
+            <!-- Done Column -->
+            <div class="column" data-status="done">
+                <div class="column__header">
+                    <h2>Done</h2>
+                    <span class="column__count">0</span>
+                </div>
+                <div class="task-list">
+                    <article class="task kanban">
+                        <h3 class="task__title">Подготовить презентацию</h3>
+                        <p class="task__desc">Сделать слайды по итогам спринта для демонстрации.</p>
+                        <footer class="task__footer">
+                            <span class="task__label high">Высокий приоритет</span>
+                            <time class="task__date">до 22.11</time>
+                        </footer>
+                    </article>
+                    <article class="task kanban">
+                        <h3 class="task__title">Изуть основы JavaScript</h3>
+                        <p class="task__desc">Пройти модуль по переменным, функциям и объектам.</p>
+                        <footer class="task__footer">
+                            <span class="task__label medium">Средний приоритет</span>
+                            <time class="task__date">до 20.11</time>
+                        </footer>
+                    </article>
+                    
+                </div>
+
+                </div>
                 <button class="add-task">+ Добавить задачу</button>
             </div>
 
-
-            <div class="task-list">
-                <article class="task kanban">
-                    <h3 class="task__title">Придумать стилизацию</h3>
-                    <p class="task__desc">Определить желаемый стиль и шрифт.</p>
-                    <footer class="task__footer">
-                        <span class="task__label medium">Средний приоритет</span>
-                        <time class="task__date">до 14.11</time>
-                    </footer>
-                </article>
-                <button class="add-task">+ Добавить задачу</button>
-            </div>
-
-
-
-        </div>
-
-
-        <div class="column" date-status="in-progress">
-            <div class="column__header">
-                <h2>In Progress</h2>
-                <span class="column__count">1</span>
-            </div>
-
-            <div class="task-list">
-                <article class="task kanban">
-                    <h3 class="task__title">Настроить стили</h3>
-                    <p class="task__desc">Согласовать цветовую схему и тени, привести отступы к системе 8 px.</p>
-                    <footer class="task__footer">
-                        <span class="task__label low">Низкий приоритет</span>
-                        <time class="task__date">до 10.11</time>
-                    </footer>
-                </article>
-                <button class="add-task">+ Добавить задача</button>
-            </div>
-
-
-            
-        </div>
-
-        <div class="column" data-status="done">
-            <div class="column__header">
-                <h2>Done</h2>
-                <span class="column__count">0</span>
-            </div>
-            <div class="task-list"></div>
-            <button class="add-task">+ Добавить задачу</button>
         </div>
     </main>
    <script src="kanban.js"></script> 

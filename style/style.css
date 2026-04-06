@@ -354,6 +354,7 @@ html, body{
     display: flex;
     gap: 14px;
     padding: 14px 16px;
+    flex-direction: column;
 }
 
 .task.kanban{
