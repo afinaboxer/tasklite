@@ -11,3 +11,14 @@ const seconds = now.getSeconds()
 
 console.log(`${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`)
 
+const items = [
+    {id: 1, value: 'a'},
+    {id: 2, value: 'b'}
+]
+
+const obj = items.reduce((acc, item) =>{
+    acc[item.id] = item.value
+    return acc
+}, {})
+
+console.log(obj)

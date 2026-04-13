@@ -292,3 +292,4 @@ function uptadeCount(column) {
   const status = column.dataset.status;
   countEl.textContent = boardData[status].length;
 }
+
