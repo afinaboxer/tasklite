@@ -309,7 +309,7 @@ html, body{
 }
 
 .column{
-    background: rgba(225, 225, 225, 0.9);
+    ;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 16px;
@@ -445,4 +445,43 @@ html, body{
 .add-task:hover{
     background-color: rgba(37, 99, 235, 0.12);
     border: 1px solid #2563eb;
+}
+
+#drag {
+    width: 150px;
+    height: 150px;
+    background: red;
+    color: white;
+    text-align: center;
+    line-height: 150px;
+    margin: 20px;
+}
+
+#drop {
+    width: 300px;
+    height: 200px;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+.drag-over {
+    background: lightgray;
+}
+
+.task.kanban.dragging {
+    opacity: 0.6;
+    transform: scale(0.98);
+    cursor: grabbing;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.column.drag-over {
+    background: rgba(225, 225, 225, 0.95);
+    box-shadow: 0px 16px 32px 9px rgba(225, 225, 225, 0.2);
+    border-color: rgba(37, 99, 235, 0.3);
+    transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.column.drag-over .column__header h2 {
+    border-left-color: #2563eb;
 }

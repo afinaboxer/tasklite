@@ -1,7 +1,7 @@
 let boardData = {
-    "to-do"; [],
-    "in-progress"; [],
-    "done"; []
+    "to-do": [],
+    "in-progress": [],
+    "done": []
 }
 
 let draggedItem = null;
@@ -15,10 +15,23 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt');
 }
 
+function updateAllCounters() {
+    document.querySelectorAll('.column').forEach(column => {
+        const status = column.dataset.status;
+        const count = boardData[status] ? boardData[status].length : 0;
+        const counterSpan = column.querySelector('.column__count');
+        if (counterSpan) {
+            counterSpan.textContent = count;
+        }
+    });
+}
+
+
+
 function addDragEvents(el, index) {
     el.addEventListener('dragstart', e => {
         draggedItem = el;
-        draggerIndex = index;
+        draggedIndex = index;
         sourceStatus = el.closest('.column').dataset.status;
         el.classList.add('dragging');
         e.dataTransfer.effectAllowed = 'move';
@@ -45,7 +58,7 @@ function initDropZones() {
             column.classList.add('drag-over');
         });
 
-        taskList.addEventLictener('dragleave', e => {
+        taskList.addEventListener('dragleave', e => {
             if (!taskList.contains(e.relatedTarget)) {
                 column.classList.remove('drag-over');
             }
@@ -56,20 +69,20 @@ function initDropZones() {
             column.classList.remove('drag-over');
 
             if (!draggedItem || draggedIndex === null || !sourceStatus) return;
+            
+            const targetStatus = column.dataset.status;
+            if (targetStatus === sourceStatus) return;
+            
+            const [movedTask] = boardData[sourceStatus]
+            .splice(draggedIndex, 1);
+            boardData[targetStatus].push(movedTask);
+            
+            draggedItem = null;
+            draggedIndex = null;
+            sourceStatus = null;
+            
+            renderBoard();
         });
-
-        const targetStatus = column.dataset.status;
-        if (targetStatus === sourceStatus) return;
-
-        const [movedTask] = boardData[sourceStatus]
-        .splice(draggedIndex, 1);
-        boardData[targetStatus].push(movedTask);
-
-        draggedItem = null;
-        draggedIndex = null;
-        sourceStatus = null;
-
-        renderBoard();
     });
 }
 
@@ -84,20 +97,22 @@ function renderBoard() {
 
         const addBtn = taskList.querySelector('.add-task');
 
-        tasks.forEach.((task,index) => {
+        tasks.forEach((task,index) => {
             const taskEl = document.createElement('article');
             taskEl.classList.add('task', 'kanban');
             taskEl.draggable = true;
             taskEl.innerHTML = `
-            <h3 class="task___title">${escapeHtml{task.title}}</h3>
+            <h3 class="task___title">${escapeHtml(task.title)}</h3>
             ${task.desc ? `<p class="task__desc">${escapeHtml(task.desc)}</p>` : ''}
             <footer class="task__footer">
             <time class="task__date">${task.deadline ? escapeHtml(task.deadline) : ''}</time>
             </footer>
             `;
             addDragEvents(taskEl, index);
-            taskList.insertBefore(taskEl. addBtn);
-    })
+            taskList.insertBefore(taskEl, addBtn);
+    });
+    });
+    uptadeAllCounters();
 }
 
 document.querySelectorAll('.add-task').forEach(btn =>{

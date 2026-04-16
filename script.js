@@ -1,24 +1,19 @@
-const now = new Date()
-console.log(now.toLocaleString)
+function delay(ms, signal){
+    return new Promise((revorse, reject) => {
+        const timeoutId = setTimeout(resolve, ms)
+        if(signal){
+            signal.addEventListener('abort', () =>{
+                clearTimeout(timeoutId)
+                reject(new Error ('Delay aborted'))
+            })
+        }
+    })
+}
 
-const day = now.getDate()
-const month = now.getMonth() + 1
-const year = now.getFullYear()
-
-const hours = now.getHours()
-const minutes = now.getMinutes()
-const seconds = now.getSeconds()
-
-console.log(`${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`)
-
-const items = [
-    {id: 1, value: 'a'},
-    {id: 2, value: 'b'}
-]
-
-const obj = items.reduce((acc, item) =>{
-    acc[item.id] = item.value
-    return acc
-}, {})
-
-console.log(obj)
+async function runSequential(tasks){
+    const results = []
+    for(const task of tasks){
+        results.push(await task())
+    }
+    return results
+}
