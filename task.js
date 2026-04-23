@@ -185,6 +185,7 @@ tabButtons.forEach(btn => {
       else currentFilter = 'all';
 
       renderAll();
+      uptadeCounters();
   });
 });
 
@@ -200,19 +201,6 @@ function formatDate(date){
   return `${day}.${month}.${year}, ${hour}:${min}`
 }
 
-function formatDate(){
-  const hour = new Date().getHours();
-  if (hour >= 6 && hour < 12){
-    return "Утро";
-  } else if (hour >= 12 && hour < 18){
-    return "День";
-  } else if (hour >= 18 && hour < 24){
-    return "Вечер";
-  } else {
-    return "Ночь"
-  }
-}
-console.log(formateDate())
 
 sortSelect.addEventListener('change', () => {
   const val = sortSelect.value
@@ -231,7 +219,7 @@ function updateCounters() {
     const active = tasks.filter(t => !t.done).length;
     const done = tasks.filter(t => t.done).length;
 
-    clearButton.disabled = tasks.every(task => !task.done);
+    const clearButton = document.querySelector('.footer-controls__clear');
     if (clearButton) {
       clearButton.disables = tasks.every(task => !task.done);
     }
@@ -246,11 +234,10 @@ function updateCounters() {
         `;
     }
 
-    filtered.forEach(task => footer.before(renderTask(task)));
+    
+  }
 updateCounters();
-
-}
-
+  
 const clearButton = document.querySelector('.footer-controls__clear');
 clearButton.addEventListener('click', () => {
   tasks = tasks.filter(task => !task.done);

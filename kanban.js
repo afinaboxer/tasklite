@@ -101,10 +101,29 @@ function renderBoard() {
             const taskEl = document.createElement('article');
             taskEl.classList.add('task', 'kanban');
             taskEl.draggable = true;
+            
+            let priorityText = 'Средний';
+            let priorityClass = 'medium';
+
+            switch(task.priority){
+                case 'high':
+                    priorityText = 'Высокий';
+                    priorityClass = 'high';
+                    break
+                    case 'low':
+                        priorityText = 'Низкий';
+                        priorityClass = 'low';
+                        break
+                        default:
+                            priorityText = 'Средний';
+                            priorityClass = 'medium'
+            }
+            
             taskEl.innerHTML = `
             <h3 class="task___title">${escapeHtml(task.title)}</h3>
             ${task.desc ? `<p class="task__desc">${escapeHtml(task.desc)}</p>` : ''}
             <footer class="task__footer">
+            <span class="task__label ${priorityClass}">${priorityText}</span>
             <time class="task__date">${task.deadline ? escapeHtml(task.deadline) : ''}</time>
             </footer>
             `;
